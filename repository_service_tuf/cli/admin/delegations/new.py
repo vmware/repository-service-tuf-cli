@@ -26,32 +26,6 @@ from repository_service_tuf.helpers.api_client import (
 )
 
 
-def _parse_pending_data(pending_roles_resp: Dict[str, Any]) -> Dict[str, Any]:
-    data = pending_roles_resp.get("data")
-    if data is None:
-        error = "'data' field missing from api server response/file input"
-        raise click.ClickException(error)
-
-    pending_roles: Dict[str, Dict[str, Any]] = data.get("metadata", {})
-    if len(pending_roles) == 0:
-        raise click.ClickException("No metadata available for signing")
-
-    return pending_roles
-
-
-def _get_pending_roles(settings: Any) -> Dict[str, Dict[str, Any]]:
-    """Get dictionary of pending roles for signing."""
-    response = request_server(
-        settings.SERVER, URL.METADATA_SIGN.value, Methods.GET
-    )
-    if response.status_code != 200:
-        raise click.ClickException(
-            f"Failed to fetch metadata for signing. Error: {response.text}"
-        )
-
-    return _parse_pending_data(response.json())
-
-
 DEFAULT_PATH = "delegations-new.json"
 
 
