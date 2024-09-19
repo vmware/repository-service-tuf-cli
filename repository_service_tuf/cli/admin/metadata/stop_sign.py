@@ -49,7 +49,7 @@ def stop_sign(context: click.Context) -> None:
     while True:
         console.print("\nSelect which metadata signing process to stop:")
         role = _select_role(pending_roles)
-        md: Metadata[Union[Root, Targets]] = Metadata.from_dict(
+        md: Metadata = Metadata.from_dict(
             copy.deepcopy(pending_roles[role])
         )
         if md.signed.type == Root.type:
