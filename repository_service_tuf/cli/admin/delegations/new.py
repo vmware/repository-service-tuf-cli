@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: MIT
 
 import json
-from typing import Any, Dict, Optional
+from typing import Optional
 
 import click
 from rich.markdown import Markdown
@@ -19,12 +19,9 @@ from repository_service_tuf.cli.admin.delegations import delegations
 from repository_service_tuf.cli.admin.helpers import _configure_delegations
 from repository_service_tuf.helpers.api_client import (
     URL,
-    Methods,
-    request_server,
     send_payload,
     task_status,
 )
-
 
 DEFAULT_PATH = "delegations-new.json"
 
